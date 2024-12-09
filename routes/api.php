@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\KeuanganController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +22,6 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
 
 Route::post('/send-message', [ChatController::class, 'messageUser']);
 Route::post('/buat-chat', [ChatController::class, 'mulaiChat']);
@@ -29,3 +30,8 @@ Route::post('/send-admin', [ChatController::class, 'messageAdmin']);
 Route::get('/get-messages', [ChatController::class, 'getMessages']);
 
 Route::get('/chatAdmin', [ChatController::class, 'index']);
+
+Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
+Route::post('/pendaftaran', [MahasiswaController::class, 'store']);
+
+Route::get('/keuangan', [KeuanganController::class, 'index']);
