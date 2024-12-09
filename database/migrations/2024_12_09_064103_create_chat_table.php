@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('chat', function (Blueprint $table) {
             $table->id(); // Primary Key
             $table->text('message');
-            $table->foreignId('id_acc')->constrained('acc')->onDelete('cascade'); // Foreign Key
+            $table->foreignId('id_chat'); // Foreign Key
             $table->timestamp('time_stamp');
             $table->timestamps();
         });
