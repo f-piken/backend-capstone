@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,17 +16,28 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth:api');
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::middleware(['auth:api', 'role:admin'])->group(function () {
+    Route::get('me', [loginController::class, 'me']);
+
+    Route::get('/chatAdmin', [ChatController::class, 'getChatsByStatus']);
+    Route::post('/send-admin', [ChatController::class, 'messageAdmin']);
+    Route::put('/chats/{id}/approve', [ChatController::class, 'approveChat']);
+    Route::put('/chats/{id}/end', [ChatController::class, 'endChat']);
+});
+Route::middleware(['auth:api', 'role:mahasiswa'])->group(function () {
+});
+
+
+Route::middleware(['auth','role:admin'])->group(function () {
+});
+Route::get('/get-messages/{pengirim}', [ChatController::class, 'getMessages']);
+
 
 Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
 
 Route::post('/send-message', [ChatController::class, 'messageUser']);
 Route::post('/buat-chat', [ChatController::class, 'mulaiChat']);
 
-Route::post('/send-admin', [ChatController::class, 'messageAdmin']);
-Route::get('/get-messages', [ChatController::class, 'getMessages']);
-
-Route::get('/chatAdmin', [ChatController::class, 'index']);

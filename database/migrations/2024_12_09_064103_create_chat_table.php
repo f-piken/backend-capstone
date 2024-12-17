@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('chat', function (Blueprint $table) {
             $table->id(); // Primary Key
             $table->text('message');
+            $table->string('pengirim');
             $table->foreignId('id_chat'); // Foreign Key
-            $table->timestamp('time_stamp');
             $table->timestamps();
         });
     }
