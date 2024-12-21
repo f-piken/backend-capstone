@@ -13,7 +13,6 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        // Ambil semua data dari tabel 'coba'
         $data = Mahasiswa::all();
         return response()->json($data);
     }
@@ -32,7 +31,7 @@ class MahasiswaController extends Controller
     public function store(Request $request)
     {
         try {
-            // Validasi data
+            
             $validated = $request->validate([
                 'nama' => 'required|string|max:255',
                 'nilai' => 'required|string',
