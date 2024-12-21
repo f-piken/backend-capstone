@@ -1,10 +1,11 @@
 <?php
-
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\KeuanganController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,18 +27,16 @@ Route::middleware(['auth:api', 'role:admin'])->group(function () {
     Route::post('/send-admin', [ChatController::class, 'messageAdmin']);
     Route::put('/chats/{id}/approve', [ChatController::class, 'approveChat']);
     Route::put('/chats/{id}/end', [ChatController::class, 'endChat']);
+    
+    Route::get('/keuangan', [KeuanganController::class, 'index']);
 });
 Route::middleware(['auth:api', 'role:mahasiswa'])->group(function () {
+    Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
 });
 
-
-Route::middleware(['auth','role:admin'])->group(function () {
-});
-Route::get('/get-messages/{pengirim}', [ChatController::class, 'getMessages']);
-
-
-Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
+Route::post('/pendaftaran', [MahasiswaController::class, 'store']);
 
 Route::post('/send-message', [ChatController::class, 'messageUser']);
+Route::get('/get-messages/{pengirim}', [ChatController::class, 'getMessages']);
 Route::post('/buat-chat', [ChatController::class, 'mulaiChat']);
 

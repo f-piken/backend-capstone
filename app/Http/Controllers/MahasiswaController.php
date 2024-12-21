@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\coba;
+use App\Models\Mahasiswa;
+use App\Models\Pembayaran;
 use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
@@ -12,8 +13,7 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        // Ambil semua data dari tabel 'coba'
-        $data = coba::all();
+        $data = Mahasiswa::all();
         return response()->json($data);
     }
 
@@ -30,7 +30,44 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            
+            $validated = $request->validate([
+                'nama' => 'required|string|max:255',
+                'nilai' => 'required|string',
+                'alamat' => 'required|string|max:255',
+                'tempat' => 'required|string|max:255',
+                'lahir' => 'required|date',
+                'email' => 'required|email|unique:tb_mahasiswa,email',
+                'nisn' => 'required|string|unique:tb_mahasiswa,nim',
+                'no' => 'required|string',
+                'metodePembayaran' => 'required|string',
+            ]);
+
+            // Simpan data ke tb_mahasiswa
+            $mahasiswa = Mahasiswa::create([
+                'nim' => $validated['nisn'],
+                'nama' => $validated['nama'],
+                'alamat' => $validated['alamat'],
+                'tempat' => $validated['tempat'], 
+                'tgl_lahir' => $validated['lahir'],
+                'email' => $validated['email'],
+                'status_pembayaran' => 'BELUM_LUNAS',
+            ]);
+
+            // Simpan data ke tb_pembayaran
+            Pembayaran::create([
+                'nim' => $validated['nisn'],
+                'nama' => $validated['nama'],
+                'nominal' => 300000, // Nominal pembayaran belum ada di form
+                'metode_pembayaran' => $validated['metodePembayaran'],
+                'status_pembayaran' => 'BELUM_LUNAS',
+            ]);
+
+            return response()->json(['message' => 'Pendaftaran berhasil disimpan!'], 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**
