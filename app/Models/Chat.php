@@ -13,8 +13,12 @@ class Chat extends Model
     protected $fillable = [
         'message',
         'pengirim',
+        'id_chat',
         'created_at',
         'updated_at',
     ];
-
+    public function acc()
+{
+    return $this->belongsTo(BuatChat::class, 'acc_id');
+}
 }
