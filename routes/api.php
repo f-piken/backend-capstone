@@ -29,9 +29,9 @@ Route::middleware(['auth:api', 'role:admin'])->group(function () {
     Route::put('/chats/{id}/end', [ChatController::class, 'endChat']);
     
     Route::get('/keuangan', [KeuanganController::class, 'index']);
+    Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
 });
 Route::middleware(['auth:api', 'role:mahasiswa'])->group(function () {
-    Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
 });
 
 Route::post('/pendaftaran', [MahasiswaController::class, 'store']);

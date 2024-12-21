@@ -57,8 +57,8 @@ class MahasiswaController extends Controller
 
             // Simpan data ke tb_pembayaran
             Pembayaran::create([
-                'nim' => $validated['nisn'],
-                'nama' => $validated['nama'],
+                'nim' => $mahasiswa->id,
+                'nama' => $mahasiswa->nama,
                 'nominal' => 300000, // Nominal pembayaran belum ada di form
                 'metode_pembayaran' => $validated['metodePembayaran'],
                 'status_pembayaran' => 'BELUM_LUNAS',

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('buat_chat', function (Blueprint $table) {
             $table->id(); // Primary Key
             $table->string('pengirim');
-            $table->foreignId('id_admin'); // Foreign Key
+            $table->foreignId('id_admin')->nullable();
             $table->enum('status', ['menunggu', 'berlangsung', 'berakhir']);
             $table->timestamps();
         });
