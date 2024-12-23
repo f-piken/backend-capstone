@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PembayaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/login', [LoginController::class, 'login']);
-Route::get('/user', [LoginController::class, 'getUserInfo'])->middleware('auth');
+Route::post('/kirim', [PembayaranController::class, 'kirimEmailPembayaran']);
