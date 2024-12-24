@@ -28,7 +28,7 @@ Route::middleware(['auth:api', 'role:admin'])->group(function () {
     Route::post('/send-admin', [ChatController::class, 'messageAdmin']);
     Route::put('/chats/{id}/approve', [ChatController::class, 'approveChat']);
     Route::put('/chats/{id}/end', [ChatController::class, 'endChat']);
-
+    
     Route::get('/pendaftaran', [MahasiswaController::class, 'index']);
     Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
 });
