@@ -4,7 +4,6 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\JadwalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
