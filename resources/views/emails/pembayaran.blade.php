@@ -22,4 +22,3 @@
     <p>Salam,<br>Tim {{ config('app.name') }}</p>
 </body>
 </html>
-
