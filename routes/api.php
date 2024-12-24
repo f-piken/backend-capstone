@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\JadwalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,8 @@ Route::middleware(['auth:api', 'role:mahasiswa'])->group(function () {
 
 Route::get('/mahasiswa/{id}', [MahasiswaController::class, 'show']);
 Route::post('/daftar', [MahasiswaController::class, 'store']);
+
+Route::get('/mahasiswa/{id}', [MahasiswaController::class, 'show']);
 
 Route::post('/send-message', [ChatController::class, 'messageUser']);
 Route::get('/get-messages/{pengirim}', [ChatController::class, 'getMessages']);
