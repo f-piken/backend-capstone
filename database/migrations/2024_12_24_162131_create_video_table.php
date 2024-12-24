@@ -13,11 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('chat', function (Blueprint $table) {
-            $table->id(); // Primary Key
-            $table->string('pengirim');
-            $table->foreignId('id_admin')->nullable();
-            $table->enum('status', ['menunggu', 'berlangsung', 'berakhir']);
+        Schema::create('video', function (Blueprint $table) {
+            $table->id();
+            $table->enum('kategori', ['tiktok', 'youtube']);
+            $table->string('link');
+            $table->string('judul');
+            $table->string('dekskripsi');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chat');
+        Schema::dropIfExists('video');
     }
 };

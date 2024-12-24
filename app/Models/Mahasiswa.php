@@ -8,15 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Mahasiswa extends Model
 {
     use HasFactory;
-    protected $table = 'tb_mahasiswa'; // Nama tabel
+    protected $table = 'mahasiswa'; // Nama tabel
     public $timestamps = false;
     protected $fillable = [
+        'user_id',
         'nim',
+        'nisn',
         'nama',
         'alamat',
         'tempat', 
         'tgl_lahir',
         'email',
+        'no_tlp',
         'status_pembayaran',
     ];
     public function user()

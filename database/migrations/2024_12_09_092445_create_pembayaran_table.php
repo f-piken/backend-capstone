@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tb_pembayaran', function (Blueprint $table) {
+        Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mahasiswa_id')->constrained('tb_mahasiswa')->onDelete('cascade');
-            $table->string('nim');
+            $table->foreignId('mhs_id')->constrained('mahasiswa')->onDelete('cascade');
             $table->string('nama');
             $table->decimal('nominal', 10, 2); // Menggunakan decimal untuk nominal
             $table->string('metode_pembayaran');
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_pembayaran');
+        Schema::dropIfExists('pembayaran');
     }
 };
