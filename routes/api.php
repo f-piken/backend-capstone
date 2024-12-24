@@ -40,5 +40,3 @@ Route::post('/send-message', [ChatController::class, 'messageUser']);
 Route::get('/get-messages/{pengirim}', [ChatController::class, 'getMessages']);
 Route::post('/buat-chat', [ChatController::class, 'mulaiChat']);
 
-Route::post('/pendaftaran', [MahasiswaController::class, 'store']);
-
