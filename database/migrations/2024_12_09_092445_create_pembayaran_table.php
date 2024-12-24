@@ -15,11 +15,15 @@ return new class extends Migration
     {
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
+<<<<<<< HEAD
 <<<<<<< HEAD:database/migrations/2024_12_09_092445_create_pembayaran_table.php
             $table->foreignId('mhs_id')->constrained('mahasiswa');
 =======
             $table->foreignId('nim')->constrained('tb_mahasiswa');
 >>>>>>> 875d971 (email-pembayaran):database/migrations/2024_12_09_092445_create_tb_pembayaran.php
+=======
+            $table->foreignId('mhs_id')->constrained('mahasiswa');
+>>>>>>> 324c766 (email-pembayaran)
             $table->string('nama');
             $table->integer('nominal');
             $table->string('metode_pembayaran');
