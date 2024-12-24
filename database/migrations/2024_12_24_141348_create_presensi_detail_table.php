@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('chat', function (Blueprint $table) {
-            $table->id(); // Primary Key
-            $table->string('pengirim');
-            $table->foreignId('id_admin')->nullable();
-            $table->enum('status', ['menunggu', 'berlangsung', 'berakhir']);
+        Schema::create('presensi_detail', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('presensi_id')->constrained('presensi');
+            $table->foreignId('mhs_id');
+            $table->enum('status', ['present', 'absen','permission']);
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chat');
+        Schema::dropIfExists('presensi_detail');
     }
 };

@@ -8,17 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Chat extends Model
 {
     use HasFactory;
-
     protected $table = 'chat'; // Nama tabel
+
     protected $fillable = [
-        'message',
         'pengirim',
-        'id_chat',
+        'id_admin',
+        'status',
         'created_at',
         'updated_at',
     ];
-    public function acc()
-{
-    return $this->belongsTo(BuatChat::class, 'acc_id');
-}
+
+    public function chats()
+    {
+        return $this->hasMany(ChatDetail::class, 'id_chat');
+    }
+    
 }

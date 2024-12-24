@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Pembayaran extends Model
 {
     use HasFactory;
-    protected $table = 'tb_pembayaran'; // Nama tabel
+    protected $table = 'pembayaran'; // Nama tabel
     public $timestamps = false;
     protected $fillable = [
-        'nim',
+        'mhs_id',
         'nama',
         'nominal',
         'metode_pembayaran',

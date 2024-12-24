@@ -5,22 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BuatChat extends Model
+class ChatDetail extends Model
 {
     use HasFactory;
-    protected $table = 'buat_chat'; // Nama tabel
 
+    protected $table = 'chat_detail'; // Nama tabel
     protected $fillable = [
+        'message',
         'pengirim',
-        'id_admin',
-        'status',
+        'id_chat',
         'created_at',
         'updated_at',
     ];
-
-    public function chats()
-{
-    return $this->hasMany(Chat::class, 'acc_id');
-}
-    
+    public function acc()
+    {
+        return $this->belongsTo(Chat::class, 'id_chat');
+    }
 }
