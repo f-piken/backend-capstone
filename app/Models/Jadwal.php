@@ -5,26 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Mahasiswa extends Model
+class Jadwal extends Model
 {
     use HasFactory;
-    protected $table = 'tb_mahasiswa'; // Nama tabel
+    protected $table = 'jadwal'; // Nama tabel
     public $timestamps = false;
     protected $fillable = [
-        'nim',
-        'nama',
-        'alamat',
-        'tempat', 
-        'tgl_lahir',
-        'email',
-        'status_pembayaran',
+        'hari',
+        'waktu_mulai',
+        'waktu_selesai',
+        'mata_kuliah',
+        'ruang',
     ];
     public function user()
     {
         return $this->hasOne(User::class, 'mahasiswa_id');
     }
-    public function jadwal()
+    public function mahasiswa()
     {
-        return $this->hasMany(Jadwal::class, 'mahasiswa_id','id');
+        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_id');
     }
+    
 }

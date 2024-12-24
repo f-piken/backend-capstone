@@ -3,6 +3,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\KeuanganController;
+use App\Http\Controllers\JadwalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,10 +33,14 @@ Route::middleware(['auth:api', 'role:admin'])->group(function () {
     Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
 });
 Route::middleware(['auth:api', 'role:mahasiswa'])->group(function () {
+    Route::get('/mahasiswa/me', [MahasiswaController::class, 'showAuthenticatedMahasiswa']);
+    Route::get('/mahasiswa/jadwal/me', [MahasiswaController::class, 'showAuthenticatedMahasiswaJadwal']);
+    Route::get('/mahasiswa/pembayaran/me', [MahasiswaController::class, 'showAuthenticatedMahasiswaPembayaran']);
 });
 
 Route::post('/pendaftaran', [MahasiswaController::class, 'store']);
-
+Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
+Route::get('/mahasiswa/{id}', [MahasiswaController::class, 'show']);
 Route::post('/send-message', [ChatController::class, 'messageUser']);
 Route::get('/get-messages/{pengirim}', [ChatController::class, 'getMessages']);
 Route::post('/buat-chat', [ChatController::class, 'mulaiChat']);

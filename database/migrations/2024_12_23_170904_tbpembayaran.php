@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class tbpembayaran extends Migration
 {
     /**
      * Run the migrations.
@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('tb_pembayaran', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nim')->constrained('tb_mahasiswa');
+            $table->foreignId('mahasiswa_id')->constrained('tb_mahasiswa')->onDelete('cascade');
+            $table->string('nim');
             $table->string('nama');
-            $table->integer('nominal');
+            $table->decimal('nominal', 10, 2); // Menggunakan decimal untuk nominal
             $table->string('metode_pembayaran');
             $table->enum('status_pembayaran', ['LUNAS', 'BELUM_LUNAS']);
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -34,4 +34,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('tb_pembayaran');
     }
-};
+}
