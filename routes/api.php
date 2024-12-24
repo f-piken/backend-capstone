@@ -30,7 +30,6 @@ Route::middleware(['auth:api', 'role:admin'])->group(function () {
     Route::put('/chats/{id}/end', [ChatController::class, 'endChat']);
 
     Route::get('/pendaftaran', [MahasiswaController::class, 'index']);
-    Route::get('/mahasiswa', [MahasiswaController::class, 'index']);
 });
 
 Route::middleware(['auth:api', 'role:mahasiswa'])->group(function () {
