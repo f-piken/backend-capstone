@@ -3,7 +3,7 @@
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
-use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\KeuanganController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
