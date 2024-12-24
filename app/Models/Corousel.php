@@ -5,10 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class coba extends Model
+class Corousel extends Model
 {
     use HasFactory;
-
-    protected $table = 'coba'; // Nama tabel
-    protected $fillable = ['nama', 'alamat'];
 }

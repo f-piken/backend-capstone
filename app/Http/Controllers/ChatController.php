@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BuatChat;
 use App\Models\Chat;
+use App\Models\ChatDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,7 +11,7 @@ class ChatController extends Controller
 {
     public function approveChat($id)
     {
-        $chat = BuatChat::find($id);
+        $chat = Chat::find($id);
 
         if (!$chat) {
             return response()->json([
@@ -33,7 +33,7 @@ class ChatController extends Controller
     public function endChat($id)
     {
         // Cari chat berdasarkan ID
-        $chat = BuatChat::find($id);
+        $chat = Chat::find($id);
 
         if (!$chat) {
             return response()->json([
@@ -57,7 +57,7 @@ class ChatController extends Controller
     {
         $status = $request->query('status', 'menunggu');
 
-        $chats = BuatChat::where('status', $status)->get();
+        $chats = Chat::where('status', $status)->get();
 
         return response()->json($chats);
     }
@@ -68,7 +68,7 @@ class ChatController extends Controller
             'pengirim' => 'required|string',
         ]);
 
-        $chat = BuatChat::create([
+        $chat = Chat::create([
             'pengirim' => $request->pengirim,
             'status' => "menunggu",
         ]);
@@ -85,14 +85,14 @@ class ChatController extends Controller
             'id_chat' => 'required',
         ]);
 
-        $acc = BuatChat::where('pengirim', $request->id_chat)->first();
+        $acc = Chat::where('pengirim', $request->id_chat)->first();
         if (!$acc) {
             return response()->json([
-                'message' => 'Data buat_chat tidak ditemukan untuk pengirim tersebut.',
+                'message' => 'Data chat tidak ditemukan untuk pengirim tersebut.',
             ], 404);
         }
-        // Simpan pesan ke database Chat
-        $chat = Chat::create([
+        // Simpan pesan ke database ChatDetail
+        $chat = ChatDetail::create([
             'message' => $request->message,
             'id_chat' => $acc->id,
             'pengirim' => 'user',
@@ -111,15 +111,15 @@ class ChatController extends Controller
             'message' => 'required|string|max:500',
             'id_chat' => 'required',
         ]);
-        $acc = BuatChat::where('pengirim', $request->id_chat)->first();
+        $acc = Chat::where('pengirim', $request->id_chat)->first();
         if (!$acc) {
             return response()->json([
-                'message' => 'Data buat_chat tidak ditemukan untuk pengirim tersebut.',
+                'message' => 'Data chat tidak ditemukan untuk pengirim tersebut.',
             ], 404);
         }
         $sender = "admin";
 
-        $chat = Chat::create([
+        $chat = ChatDetail::create([
             'message' => $request->message,
             'id_chat' => $acc->id,
             'pengirim' => $sender,
@@ -134,14 +134,14 @@ class ChatController extends Controller
     public function getMessages($pengirim)
     {
 
-        $buatChat = BuatChat::where('pengirim', $pengirim)
+        $Chat = Chat::where('pengirim', $pengirim)
                        ->first();
 
-        if (!$buatChat) {
+        if (!$Chat) {
             return response()->json([], 200);
         }
 
-        $chats = Chat::where('id_chat', $buatChat->id)
+        $chats = ChatDetail::where('id_chat', $Chat->id)
                      ->latest()
                      ->take(10)
                      ->get();

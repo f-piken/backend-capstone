@@ -19,7 +19,7 @@ class Pembayaran extends Mailable
 
     public function build()
     {
-        return $this->subject('Konfirmasi Pembayaran Berhasil')
+        return $this->subject('Konfirmasi Pembayaran')
                     ->view('emails.pembayaran')
                     ->with('data', $this->data);
     }

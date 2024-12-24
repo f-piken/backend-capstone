@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tb_pembayaran', function (Blueprint $table) {
+        Schema::create('video', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nim')->constrained('tb_mahasiswa');
-            $table->string('nama');
-            $table->integer('nominal');
-            $table->string('metode_pembayaran');
-            $table->enum('status_pembayaran', ['LUNAS', 'BELUM_LUNAS']);
+            $table->enum('kategori', ['tiktok', 'youtube']);
+            $table->string('link');
+            $table->string('judul');
+            $table->string('dekskripsi');
             $table->timestamps();
         });
-        
     }
 
     /**
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tb_pembayaran');
+        Schema::dropIfExists('video');
     }
 };

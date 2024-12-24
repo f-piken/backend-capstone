@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('chat', function (Blueprint $table) {
+        Schema::create('chat_detail', function (Blueprint $table) {
             $table->id(); // Primary Key
             $table->text('message');
             $table->string('pengirim');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chat');
+        Schema::dropIfExists('chat_detail');
     }
 };

@@ -13,13 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('chat', function (Blueprint $table) {
-            $table->id(); // Primary Key
-            $table->string('pengirim');
-            $table->foreignId('id_admin')->nullable();
-            $table->enum('status', ['menunggu', 'berlangsung', 'berakhir']);
+        Schema::create('pembayaran', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('mhs_id')->constrained('mahasiswa');
+            $table->string('nama');
+            $table->integer('nominal');
+            $table->string('metode_pembayaran');
+            $table->enum('status_pembayaran', ['LUNAS', 'BELUM_LUNAS']);
             $table->timestamps();
         });
+        
     }
 
     /**
@@ -29,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chat');
+        Schema::dropIfExists('pembayaran');
     }
 };
