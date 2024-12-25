@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('mhs_id')->constrained('mahasiswa');
             $table->string('nama');
+            $table->string('id_transaksi')->nullable();
             $table->integer('nominal');
             $table->string('metode_pembayaran');
-            $table->enum('status_pembayaran', ['LUNAS', 'BELUM_LUNAS']);
+            $table->enum('status_pembayaran', ['BELUM LUNAS','LUNAS','EXPIRED','UNKNOW']);
             $table->timestamps();
         });
         

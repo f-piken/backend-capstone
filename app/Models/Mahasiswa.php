@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Mahasiswa extends Model
 {
     use HasFactory;
-    protected $table = 'mahasiswa'; // Nama tabel
-    public $timestamps = false;
+    protected $table = 'mahasiswa';
     protected $fillable = [
         'user_id',
         'nim',
@@ -20,6 +19,7 @@ class Mahasiswa extends Model
         'tgl_lahir',
         'email',
         'no_tlp',
-        'status_pembayaran',
+        'created_at',
+        'updated_at',
     ];
 }

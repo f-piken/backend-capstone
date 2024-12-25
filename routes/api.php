@@ -42,3 +42,4 @@ Route::post('/buat-chat', [ChatController::class, 'mulaiChat']);
 
 Route::post('/kirim-email-pembayaran', [PembayaranController::class,'kirimEmailPembayaran']);
 
+Route::post('/midtrans/webhook', [PembayaranController::class, 'webhook']);

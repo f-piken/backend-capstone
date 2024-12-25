@@ -53,16 +53,15 @@ class MahasiswaController extends Controller
                 'tgl_lahir' => $validated['lahir'],
                 'email' => $validated['email'],
                 'no_tlp' => $validated['no'],
-                'status_pembayaran' => 'BELUM_LUNAS',
             ]);
 
             // Simpan data ke tb_pembayaran
             Pembayaran::create([
                 'mhs_id' => $mahasiswa->id,
                 'nama' => $mahasiswa->nama,
-                'nominal' => 300000, // Nominal pembayaran belum ada di form
+                'nominal' => 300000,
                 'metode_pembayaran' => $validated['metodePembayaran'],
-                'status_pembayaran' => 'BELUM_LUNAS',
+                'status_pembayaran' => 'BELUM LUNAS',
             ]);
 
             return response()->json(['message' => 'Pendaftaran berhasil disimpan!'], 201);
