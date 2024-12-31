@@ -2,10 +2,7 @@
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
-<<<<<<< HEAD
-=======
 use App\Http\Controllers\JadwalController;
->>>>>>> humam
 use App\Http\Controllers\PembayaranController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,14 +38,7 @@ Route::middleware(['auth:api', 'role:mahasiswa'])->group(function () {
     Route::get('/mahasiswa/pembayaran/me', [MahasiswaController::class, 'showAuthenticatedMahasiswaPembayaran']);
 });
 
-<<<<<<< HEAD
 Route::post('/daftar', [MahasiswaController::class, 'store']);
-=======
-Route::get('/mahasiswa/{id}', [MahasiswaController::class, 'show']);
-Route::post('/daftar', [MahasiswaController::class, 'store']);
-
-Route::get('/mahasiswa/{id}', [MahasiswaController::class, 'show']);
->>>>>>> humam
 
 Route::post('/send-message', [ChatController::class, 'messageUser']);
 Route::get('/get-messages/{pengirim}', [ChatController::class, 'getMessages']);
@@ -56,3 +46,4 @@ Route::post('/buat-chat', [ChatController::class, 'mulaiChat']);
 
 Route::post('/kirim-email-pembayaran', [PembayaranController::class,'kirimEmailPembayaran']);
 
+Route::post('/midtrans/webhook', [PembayaranController::class, 'webhook']);

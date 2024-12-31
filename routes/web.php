@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PembayaranController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,3 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/midtrans/webhook', [PembayaranController::class, 'webhook']);
