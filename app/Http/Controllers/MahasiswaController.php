@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use App\Models\Pembayaran;
+use App\Models\Jadwal;
 use Illuminate\Http\Request;
 
 class MahasiswaController extends Controller
@@ -76,15 +77,24 @@ class MahasiswaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            // Mencari mahasiswa berdasarkan ID
+            $data = Mahasiswa::findOrFail($id);  // Menggunakan findOrFail untuk menghindari error 404 jika ID tidak ditemukan
+            
+            // Mengembalikan response dalam format JSON
+            return response()->json($data);
+        } catch (\Exception $e) {
+            // Jika terjadi kesalahan, mengembalikan error 404
+            return response()->json(['error' => 'Mahasiswa tidak ditemukan'], 404);
+        }
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        
     }
 
     /**
@@ -119,4 +129,66 @@ class MahasiswaController extends Controller
     {
         //
     }
+    public function showAuthenticatedMahasiswa()
+    {
+        // Mendapatkan user yang sedang login
+        $user = auth()->user(); // Mendapatkan user yang sedang login
+    
+        // Pastikan user memiliki relasi dengan mahasiswa melalui mahasiswa_id
+        if (!$user->mahasiswa_id) {
+            return response()->json(['error' => 'User tidak terkait dengan mahasiswa'], 404);
+        }
+    
+        // Ambil data mahasiswa berdasarkan mahasiswa_id dari user
+        $mahasiswa = Mahasiswa::find($user->mahasiswa_id); // Cari mahasiswa berdasarkan ID
+    
+        // Jika data mahasiswa tidak ditemukan
+        if (!$mahasiswa) {
+            return response()->json(['error' => 'Mahasiswa tidak ditemukan'], 404);
+        }
+    
+        // Kembalikan data mahasiswa dalam bentuk JSON
+        return response()->json($mahasiswa);
+    }
+
+    public function showAuthenticatedMahasiswaJadwal()
+    {
+        // Mendapatkan user yang sedang login
+        $user = auth()->user(); // Mendapatkan user yang sedang login
+    
+        // Pastikan user memiliki relasi dengan mahasiswa melalui mahasiswa_id
+        if (!$user->mahasiswa_id) {
+            return response()->json(['error' => 'User tidak terkait dengan mahasiswa'], 404);
+        }
+    
+        // Ambil data jadwal berdasarkan mahasiswa_id dari user
+        $jadwal = Jadwal::where('mahasiswa_id', $user->mahasiswa_id)->get();
+    
+        // Jika data jadwal tidak ditemukan
+        if ($jadwal->isEmpty()) {
+            return response()->json(['error' => 'Jadwal tidak ditemukan'], 404);
+        }
+    
+        // Kembalikan data jadwal dalam bentuk JSON
+        return response()->json($jadwal);
+    }
+
+    public function showAuthenticatedMahasiswaPembayaran()
+    {
+        $user = auth()->user();
+
+        if (!$user->mahasiswa_id){
+            return response()->json(['error' => "User tidak terkait dengan mahasiswa"], 404);
+        }
+
+        $pembayaran = Pembayaran::where('mahasiswa_id', $user->mahasiswa_id)->get();
+
+        if ($pembayaran->isEmpty()){
+            return response()->json(['error' => "Pembayaran Tidak Ditemukan"], 404);
+        }
+
+        return response()->json($pembayaran);
+    }
+    
+    
 }

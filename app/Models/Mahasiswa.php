@@ -22,4 +22,12 @@ class Mahasiswa extends Model
         'no_tlp',
         'status_pembayaran',
     ];
+    public function user()
+    {
+        return $this->hasOne(User::class, 'mahasiswa_id');
+    }
+    public function jadwal()
+    {
+        return $this->hasMany(Jadwal::class, 'mahasiswa_id','id');
+    }
 }
