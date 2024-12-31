@@ -24,7 +24,6 @@ return new class extends Migration
             $table->date('tgl_lahir');
             $table->string('email')->unique();
             $table->string('no_tlp')->unique();
-            $table->string('status_pembayaran');
             $table->timestamps();
         });
     }

@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class Pembayaran extends Mailable
+class AkunMahasiswa extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,8 +19,8 @@ class Pembayaran extends Mailable
 
     public function build()
     {
-        return $this->subject('Konfirmasi Pembayaran')
-                    ->view('emails.pembayaran')
+        return $this->subject('Informasi Akun Mahasiswa')
+                    ->view('emails.mahasiswa')
                     ->with('data', $this->data);
     }
 }
